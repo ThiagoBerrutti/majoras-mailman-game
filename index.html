@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count exactly to 10 seconds!</title>
+    <link rel="stylesheet" href="./mailman.css">
+</head>
+<body>
+    <div class="difficulty-bar">
+        <label for="easy">
+        <input type="radio" name="difficulty" id="easy" value="Easy">Easy</label>
+        
+        <label for="normal">
+        <input type="radio" id="normal" name="difficulty" value="Normal">Normal</label>
+        
+        <label for="hard">
+        <input type="radio" id="hard" name="difficulty" value="Hard">Hard</label>
+        
+        <label for="very-hard">
+        <input type="radio" id="very-hard" name="difficulty" value="Very Hard">Very Hard</label>
+    </div>    
+
+    <div class="game-container">
+        <p id="timer">0.0s</p>
+        <button id="play_btn">START</button>
+        <div class="result-container">
+            <p id="result"></p>
+        </div>    
+    </div>
+    <script src="mailman.js"></script>
+</body>
+</html>
+  

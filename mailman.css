@@ -1,0 +1,114 @@
+body{
+    padding:0;
+    margin:0;
+    font-family:sans-serif;
+    background-color:#777;
+}
+.game-container{
+    position:relative;
+    text-align:center;
+    width:80vw;
+    height:80vh;
+    background-color:#ccc;
+    border:5px solid rgb(150, 17, 17);
+    border-radius:15px;    
+    margin:auto;
+    transform: translateY(10vh);
+}
+
+#timer{
+    position:absolute;
+    top:60px;
+    left:50%;
+    color:#222;    
+    transform:translateX(calc(-50% + 10px));
+    font-size:72px;
+    margin:0;
+}
+
+input[type='radio']:after {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    /* top: -2px;
+    left: -1px; */
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    /* top: -2px;
+    left: -1px; */
+    position: relative;
+    background-color: hsl(0, 80%, 50%);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+
+#play_btn{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-100%);
+    width:150px;
+    height:70px;
+    background-color:#efefef;
+    border-radius:10px;
+    border: 5px inset hsl(0,70%, 40%);
+    transition: all 0.1s ease-out;
+    font-size:28px;
+    box-shadow: 5px 5px 2px;
+}
+
+#play_btn:active{
+    border-style:outset;
+    box-shadow: 2px 2px 1px;
+    transform:translate(-50%,-100%) scale(98%);
+}
+
+.result-container{
+    /* float:left; */
+    font-size:24px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:fixed;
+    bottom:15px;
+    left:50%;
+    transform:translateX(-50%);
+    overflow: auto;
+    /* border:5px solid #777; */
+    
+    background-color:#e7e7e7;
+    margin-top:80px;
+    max-width:500px;    
+    width:0;
+    height:0;
+    border:none;
+    transition-property: height, width;
+    transition-duration: 0.2s;
+}
+
+.result-container.show{
+    background:red;
+    width:90vw;
+    max-width:500px;
+    height:auto;
+    border:5px solid #777;
+    border-radius:5px;
+}
+
+#result{
+    margin:0;
+}
