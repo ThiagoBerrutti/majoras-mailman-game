@@ -14,6 +14,9 @@ const $resultText = document.getElementById('result')
 const $resultDiv = document.querySelector('.result-container')
 const $difficultySelect = document.getElementById('difficulty-bar')
 
+var ticSound = new Audio('./audios/tic.wav')
+var niceSound = new Audio('./audios/nice.wav')
+var plingSound = new Audio('./audios/pling.wav')
 var tempoPerfeito = 3
 var gameRunning = false;
 var tempoContando = null;
@@ -54,10 +57,11 @@ function handleClick(e){
 }
 
 function setSoundsTimers(){
-    teste = new Audio('./audios/tic.wav').play()
     
-    var tic2 = setTimeout(()=> new Audio('./audios/tic.wav').play(),1000)
-    var tic3 = setTimeout(()=> new Audio('./audios/tic.wav').play(),2000)
+    ticSound.play()
+    
+    var tic2 = setTimeout(()=> ticSound.play(),1000)
+    var tic3 = setTimeout(()=> ticSound.play(),2000)
     
     return [tic2, tic3]
 }
@@ -117,12 +121,12 @@ function mostraResultado(tempoFinal){
     
     (margemDeErro == 0)? (
         $resultText.textContent = "Incrível! Você conseguiu contar exatamente "+tempoPerfeito+" segundos!",
-            new Audio('./audios/nice.wav').play()
+            niceSound.play()
         ):  ((margemDeErro <= 1) && (margemDeErro >= -1))? 
                 ($resultText.textContent = "Na trave! Errou por apenas "+margemDeErro+'s',
-                new Audio('./audios/pling.wav').play()        
+                plingSound.play()        
             ):  ($resultText.textContent = "Você errou por "+margemDeErro+"s. Tente denovo, é difícil mesmo",
-                    new Audio('./audios/pling.wav').play()) 
+                    plingSound.play()) 
 }
         
 function apagaResultado(){
