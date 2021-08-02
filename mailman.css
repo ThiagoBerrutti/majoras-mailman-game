@@ -14,7 +14,7 @@ body{
     position:relative;
     text-align:center;
     width:80vw;
-    max-width:600px;
+    max-width:500px;
     height:80vh;
     max-height:800px;
     background-image: linear-gradient(45deg, hsl(240, 80%, 5%), hsla(240, 20%, 10%, .9));
@@ -23,12 +23,100 @@ body{
     margin:auto;
 }
 
+
+/* ======= VOLUME ======= */
+
+.volume-container{
+    position:absolute;
+    top:50px;
+    left:50px;
+    /* border:1px solid black; */
+    width:40px;
+    height:40px;
+    transition:all .2s;
+}
+
+
+#volume-icon {
+    display:block;
+    position:absolute;
+    font-size:2em;
+    color:hsla(240, 20%, 10%);
+    cursor:pointer;
+}
+
+.volume-container:hover{
+height:120px;
+width:120px;
+}
+
+.volume-container:hover .volume-slider-container{
+    left:15px;
+    opacity:1;
+    /* top:43px; */
+    /* transition: all 0.5s; */
+}
+
+
+
+.volume-slider-container{
+    position:relative;
+    width:120px;
+    border-radius:10px;
+    top:33px;
+    background-color:hsla(240, 20%, 10%, .9);
+    opacity:0;
+    transform:rotate(-90deg); 
+    transition-property: left, top, opacity;
+    transition-duration: 0.2s ;
+    left:-20px;
+    
+}
+
+#volume-slider{ 
+    transform-origin:center;
+    cursor:pointer;
+    margin:0;
+    padding:0;
+    margin:20px;
+    width:80px;
+    height:12px;
+    border-radius:6px;
+    -ms-progress-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-appearance: vertical;
+    transition:opacity .2s;
+    opacity: 1;
+}
+
+#volume-slider:hover{
+    opacity:.9;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    appearance:none;
+    width: 18px; 
+    height: 18px; 
+    background: hsl(0,70%, 40%);
+    border-radius:50%;
+    cursor: pointer; 
+  }
+  
+#volume-slider::-moz-range-thumb {
+    appearance:none;
+    width: 18px; 
+    height: 18px;
+    background: #04AA6D; 
+    cursor: pointer; 
+  }
+
 #regras{
     text-align:center;
-    color:lightgreen;
-    font-size:48px;
+    color:white;
+    text-transform:uppercase;
+    font-size:32px;
     margin:20px;
-
 }
 
 .timer_container{
@@ -36,10 +124,10 @@ body{
     justify-content: center;
     align-items:center;
     position:relative;
-    top:20px;
-    left:20px;
+    top:40px;
+    left:60px;
     
-    width:calc(100% - 40px);
+    width:calc(100% - 120px);
     height: 12em;
     background-image: linear-gradient(-45deg, #ccc, #ddd 90%) ;
     border:5px solid #777;
@@ -49,8 +137,7 @@ body{
 
 #timer{
     position:absolute;
-    color:#222;    
-    
+    color:#222;
     font-size:72px;
     margin:0;
 }

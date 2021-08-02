@@ -1,4 +1,4 @@
-
+// O timer mostrado no jogo é um elemento que possui seu apontador, seu valor, um método pra deixar invisível que guarda nele mesmo o índice do timeout
 const $timer ={
     el: document.getElementById('timer'),
     interval: null,
@@ -9,10 +9,19 @@ const $timer ={
     },
     invisibleHandler: null
     }
+
 const $play_btn = document.getElementById('play_btn')
 const $resultText = document.getElementById('result')
 const $resultDiv = document.querySelector('.result-container')
 const $difficultySelect = document.getElementById('difficulty-bar')
+const $volumeSlider = document.getElementById('volume-slider')
+const $volumeIcon = document.getElementById('volume-icon')
+const volumeClassList = [
+    'fa-volume-mute',
+    'fa-volume-off',
+    'fa-volume-down',
+    'fa-volume-up'
+]
 
 var ticSound = new Audio('./audios/tic.wav')
 var niceSound = new Audio('./audios/nice.wav')
@@ -20,8 +29,69 @@ var plingSound = new Audio('./audios/pling.wav')
 var tempoPerfeito = 3
 var gameRunning = false;
 var tempoContando = null;
-var handleSoundTimers = []
+var handleSoundTimers = [] // Nessa variável global guardo todos índices os timeouts dos sons, pra desalocar depois
 
+var volume = {
+    value: $volumeSlider.value,
+    classeAtual: volumeClassList[$volumeSlider.value],
+    ultimoVolume: $volumeSlider.value,
+    set(num){   
+        
+        volume.ultimoVolume = volume.value;
+        volume.value = num;
+        volume.classeAtual = volumeClassList[num];
+
+        $volumeSlider.value = num;
+        $volumeIcon.classList.remove(volumeClassList[volume.ultimoVolume])
+        $volumeIcon.classList.add(volume.classeAtual)
+        console.table(volume)
+        }
+}
+
+
+//====== VOLUME ======//
+
+function mutaVolume(){
+    volume.set(0)
+
+    // volume.value = $volumeSlider.value;
+    // $volumeSlider.value = 0;
+    // changeVolume()
+    console.log('mutavolume')
+}
+
+function resetaVolume(){
+    volume.set(volume.ultimoVolume)
+    // changeVolume();
+}
+
+
+function changeVolume(){
+    volume.set($volumeSlider.value)
+    setVolume()
+}
+
+function setVolume(){
+    valor = volume.value/ (volumeClassList.length-1);
+    ticSound.volume = valor
+    plingSound.volume = valor
+    niceSound.volume = valor
+}
+
+$volumeIcon.addEventListener('click', () =>{
+   
+    if (volume.value == 0){
+         resetaVolume()
+    }else{
+        mutaVolume()
+    }
+    setVolume()
+})    
+ 
+$volumeSlider.addEventListener('input',changeVolume)
+changeVolume()
+
+//======== DIFICULDADE =========//
 
 function setDifficulty(difficultyName){
     const difficultyList = {
@@ -42,6 +112,8 @@ $difficultySelect.addEventListener('change', e =>{
     $time.textContent = tempoPerfeito;
 })
 
+//========= BOTAO DE JOGO ========//
+
 $play_btn.addEventListener('mousedown',handleClick)
 
 function handleClick(e){
@@ -56,12 +128,19 @@ function handleClick(e){
     gameRunning = !gameRunning
 }
 
+// ======== SONS ========= //
+
+function playSound(sound){
+    sound.load()
+    sound.play()
+}
+
 function setSoundsTimers(){
     
-    ticSound.play()
+    playSound(ticSound)
     
-    var tic2 = setTimeout(()=> ticSound.play(),1000)
-    var tic3 = setTimeout(()=> ticSound.play(),2000)
+    var tic2 = setTimeout(()=> playSound(ticSound),1000)
+    var tic3 = setTimeout(()=> playSound(ticSound),2000)
     
     return [tic2, tic3]
 }
@@ -72,6 +151,8 @@ function clearSounds(){
     })
 }
 
+
+// ======== TIMER ======== //
 function startTimer(){
     var horaInicial = Date.now();
     
@@ -92,7 +173,6 @@ function destacaTimerColor(cor = 'red'){
         }
 }
 
-
 function setTimerInvisible(time){
     $timer.invisible(time)
 }
@@ -103,13 +183,14 @@ function stopTimer(){
     clearSounds();
     clearTimeout($timer.invisibleHandler)
     clearInterval($timer.interval)
-    mostraResultado(tempoContando)
-    
+    mostraResultado(tempoContando)    
 }
 
 function formataTempo(tempo,casas = 0){
     return (tempo/1000).toFixed(casas);
 }
+
+// ========= RESULTADO ========= //
 
 function mostraResultado(tempoFinal){
 
@@ -124,9 +205,9 @@ function mostraResultado(tempoFinal){
             niceSound.play()
         ):  ((margemDeErro <= 1) && (margemDeErro >= -1))? 
                 ($resultText.textContent = "Na trave! Errou por apenas "+margemDeErro+'s',
-                plingSound.play()        
+                playSound(plingSound)        
             ):  ($resultText.textContent = "Você errou por "+margemDeErro+"s. Tente denovo, é difícil mesmo",
-                    plingSound.play()) 
+                playSound(plingSound)) 
 }
         
 function apagaResultado(){
