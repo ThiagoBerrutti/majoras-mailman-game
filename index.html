@@ -5,44 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Count exactly to 10 seconds!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spartan&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <link rel="stylesheet" href="./mailman.css">
 </head>
 <body>
-    <label for="difficulty-bar"></label>
-    <select name="difficulty" id="difficulty-bar">
-        <option value="" selected disabled>Dificulty</option>
-        <option value="easy" >Easy</option>
-        <option value="normal">Normal</option>
-        <option value="hard">Hard</option>
-        <option value="veryHard">Very Hard</option>
-    </select>
+    <div class="container">
+        
 
-    
-    <div class="volume-container">
-        <div >
-            <i class="fas"id="volume-icon"></i>
-            <!-- <i class="fas fa-volume-down"></i>
-            <i class="fas fa-volume-mute"></i> -->
+        <div class="volume-container">
+            <div>
+                <i class="fas"id="volume-icon"></i>
+            </div>
+            <div class="volume-slider-container">
+                <input  id="volume-slider" value=0 min=0 max=3 type="range"> 
+            </div>
         </div>
-        <div class="volume-slider-container">
-            <input  id="volume-slider" min=0 max=3 type="range"> 
-        </div>
-    </div>
-    
-    <div>
-        <p id="regras">Conte exatamente <span class="time">3</span>s </p>
-    </div>
+        
+        <div class="text-container">
+            <div class="main-text">
+                <p>Clique em</p>
+                <p class="destaque">START</p>
+            </div>    
 
-    <div class="game-container">
-        <div class="timer_container">
-            <p id="timer">0.0s</p>
+            <div class="sub-text1">
+                <p>conte mentalmente</p>
+                <p>até <span class="time">3</span> segundos...</p>
+            </div>
+
+            <div class="sub-text2">
+                <p>...e clique em</p>
+                <p class="destaque">STOP!</p>
+            </div>
+        </div>
+        <div class="game-dif-container">
+            <div class="difficulty-container">
+                <p>Dificuldade: </p> 
+                    <input id="difficulty-slider" value=0 type="range" min =0 max = 3>
+            </div>
+
+            <div class="game-container">
+                <div class="timer_container">
+                    <p id="timer">0.0</p>
+                </div>    
+                <button id="play_btn">START</button>
+            </div>
+        </div>
+
+        
+        
+        <div class="result-container">
+            <p id="result"></p>
         </div>    
-        <button id="play_btn">START</button>
-    </div>
-    
-    <div class="result-container">
-        <p id="result"></p>
+
     </div>    
     <script src="mailman.js"></script>
 </body>

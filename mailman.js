@@ -13,7 +13,7 @@ const $timer ={
 const $play_btn = document.getElementById('play_btn')
 const $resultText = document.getElementById('result')
 const $resultDiv = document.querySelector('.result-container')
-const $difficultySelect = document.getElementById('difficulty-bar')
+const $difficultySelect = document.getElementById('difficulty-slider')
 const $volumeSlider = document.getElementById('volume-slider')
 const $volumeIcon = document.getElementById('volume-icon')
 const volumeClassList = [
@@ -23,10 +23,11 @@ const volumeClassList = [
     'fa-volume-up'
 ]
 
+var $time = document.querySelector('.time');
 var ticSound = new Audio('./audios/tic.wav')
 var niceSound = new Audio('./audios/nice.wav')
 var plingSound = new Audio('./audios/pling.wav')
-var tempoPerfeito = 3
+var tempoPerfeito = setDifficulty();
 var gameRunning = false;
 var tempoContando = null;
 var handleSoundTimers = [] // Nessa variável global guardo todos índices os timeouts dos sons, pra desalocar depois
@@ -93,23 +94,24 @@ changeVolume()
 
 //======== DIFICULDADE =========//
 
-function setDifficulty(difficultyName){
+function setDifficulty(){
     const difficultyList = {
-        easy:3,
-        normal:6,
-        hard:9,
-        veryHard:10
+        0: 3,
+        1: 6,
+        2: 9,
+        3: 10
     }
-    tempoPerfeito = difficultyList[difficultyName];
+    tempo = difficultyList[$difficultySelect.value]
+    $time.textContent = tempo;
+    tempoPerfeito = tempo;
+    console.log (tempo)
+    return difficultyList[$difficultySelect.value];
 }
+setDifficulty()
 
-console.log(setDifficulty('easy'))
-
-$difficultySelect.addEventListener('change', e =>{
-    var $time = document.querySelector('.time');
-
-    setDifficulty($difficultySelect.value);
-    $time.textContent = tempoPerfeito;
+$difficultySelect.addEventListener('input', e =>{
+    setDifficulty();
+    
 })
 
 //========= BOTAO DE JOGO ========//
@@ -160,7 +162,7 @@ function startTimer(){
     $timer.interval = setInterval(function(){
         let horaAtual = Date.now();
         tempoContando = formataTempo(horaAtual - horaInicial,1)
-        $timer.el.textContent = tempoContando+'s'
+        $timer.el.textContent = tempoContando
         destacaTimerColor('red');
     }, 100)   
 }

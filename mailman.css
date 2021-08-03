@@ -1,28 +1,48 @@
+@font-face {
+    font-family: digital-7;
+    src: url('./font/digital-7.ttf');
+}
+
+:root{
+    --vermelho: hsl(0,70%, 40%);
+    --dark-red:#8B0707;
+}
+
 *{
     box-sizing:border-box;
     outline:none;
     margin:0;
 }
 body{
+    color:#262323;
     padding:0;
     margin:0;
-    font-family:sans-serif;
-    background-color:#777;
+    font-family: 'Spartan', sans-serif;
+    background-color:#f1f1f1;
+
     height:100vh;
 }
-.game-container{
-    position:relative;
-    text-align:center;
-    width:80vw;
-    max-width:500px;
-    height:80vh;
-    max-height:800px;
-    background-image: linear-gradient(45deg, hsl(240, 80%, 5%), hsla(240, 20%, 10%, .9));
-    border:5px solid rgb(150, 17, 17);
-    border-radius:15px;    
+
+.container{
     margin:auto;
+    /* background-color: #ff000077; */
+    display:flex;
+    max-width:700px;
+    justify-content:space-between;
+    min-width:fit-content;
+    height:100%;
+    width: 60vw;
 }
 
+.game-dif-container{
+    /* border:1px solid blue; */
+    height:fit-content;
+    position:relative;
+    top:calc(133px - 57px);
+    
+    
+    
+}
 
 /* ======= VOLUME ======= */
 
@@ -40,7 +60,7 @@ body{
 #volume-icon {
     display:block;
     position:absolute;
-    font-size:2em;
+    font-size:30px;
     color:hsla(240, 20%, 10%);
     cursor:pointer;
 }
@@ -53,11 +73,7 @@ width:120px;
 .volume-container:hover .volume-slider-container{
     left:15px;
     opacity:1;
-    /* top:43px; */
-    /* transition: all 0.5s; */
 }
-
-
 
 .volume-slider-container{
     position:relative;
@@ -69,8 +85,7 @@ width:120px;
     transform:rotate(-90deg); 
     transition-property: left, top, opacity;
     transition-duration: 0.2s ;
-    left:-20px;
-    
+    left:-20px;    
 }
 
 #volume-slider{ 
@@ -107,54 +122,72 @@ width:120px;
     appearance:none;
     width: 18px; 
     height: 18px;
-    background: #04AA6D; 
+    background: var(--dark-red);
     cursor: pointer; 
   }
 
-#regras{
-    text-align:center;
-    color:white;
-    text-transform:uppercase;
-    font-size:32px;
-    margin:20px;
-}
+
+/* ====== TIMER ====== */  
 
 .timer_container{
     display:flex;
     justify-content: center;
     align-items:center;
-    position:relative;
+    position:absolute;
     top:40px;
-    left:60px;
-    
-    width:calc(100% - 120px);
-    height: 12em;
-    background-image: linear-gradient(-45deg, #ccc, #ddd 90%) ;
-    border:5px solid #777;
+    left:50%;
+    transform: translateX(-50%);
+    /* margin:auto; */
+    width:175px;  
+    height: 125px;
+    background-image: linear-gradient(135deg, #fff 10%, rgba(255, 255, 255, .5) 90%) ;
+    /* border:5px solid #777; */
     border-radius:10px;
-    box-shadow: inset 2px 2px 2px #333;
+    box-shadow: inset 2px 2px 5px #333;
 }
 
 #timer{
+    font-family:digital-7;
     position:absolute;
-    color:#222;
     font-size:72px;
     margin:0;
 }
 
+/* ======== GAME ======== */
+
+.game-container{
+    flex-shrink:0;
+    position:relative;
+    bottom:0;
+    
+    width:341px;
+    height:485px;
+    max-height:800px;
+    box-shadow: 5px 5px 5px rgb(66, 66, 66, .25), -5px -5px 5px rgb(255, 255, 255,.25);
+    background-color: #dcdcdc;
+    border-radius:15px;    
+
+}
+
+
+/* ======== BOTÃO ======== */
+
 #play_btn{
+    padding:0px;
     position:absolute;
-    bottom: 50px;
+    bottom: 80px;
     left: 50%;
     transform: translate(-50%);
-    width:120px;
-    height:120px;
-    background-color:#efefef;
+    width: 90px;
+    height:90px;
+    background-color:#f7f7f7;
     border-radius:50%;
-    border: 8px inset hsl(0,70%, 40%);
+    border: 8px solid hsl(0,70%, 40%);
     transition: all 0.1s ease-out;
-    font-size:28px;
-    box-shadow: 5px 5px 5px #000;
+    box-sizing:content-box;
+       font-size:20px;
+    letter-spacing:0%;
+    box-shadow: 5px 5px 5px #262323, -5px -5px 5px rgba(255, 255, 240, .25);
 }
 
 #play_btn:active{
@@ -171,7 +204,7 @@ width:120px;
     transform: translate(-50%) scale(95%);
 }
 
-
+/* ======== POPUP ======== */
 
 .result-container{
     position:fixed;
@@ -194,12 +227,11 @@ width:120px;
     max-width:500px;
     
     border-radius:5px;
-    border:0px solid hsl(0,70%, 40%);
+    border:0px solid var(--vermelho);
     
     transform:translate(-50%, -50%); 
     transition-property: width, height, border;
     transition-duration: .1s;
-    
 }
 
 
@@ -207,9 +239,7 @@ width:120px;
     border-width:3px;
     width:90%;
     padding:15px;
-    
     height:7em;
-    
     box-shadow: 15px 15px 15px #000;
 }
 
@@ -218,3 +248,108 @@ width:120px;
     text-align:center;
     margin:0;
 }
+
+/* ========== TEXTO ========*/
+
+.text-container{
+    flex-shrink:0;
+    position:relative;
+    display:block;
+    width:260px;
+    margin-right:max(90px, 10vw);
+    /* min-width:260px; */
+    top:133px;
+    /* border:1px solid blue; */
+    height:fit-content;
+}
+
+.main-text, .sub-text1, .sub-text2{
+  position:relative;
+  display:block;
+  /* border:1px solid black; */
+}
+
+.main-text{
+    font-size: 40px;
+    margin-bottom:40px;
+    line-height:.9;
+}
+
+.destaque{
+    color: var(--vermelho);    
+}
+
+.main-text .destaque{
+    margin-left:3ch;
+}
+
+.sub-text2 .destaque{
+    margin-left:5ch;
+}
+
+.sub-text1{
+    margin-bottom:23px;
+}
+
+.sub-text2{
+    line-height: 1;
+}
+
+.sub-text1, .sub-text2{
+    font-size: 24px;
+    color: #535353;
+}
+
+.sub-text2 .destaque{
+    font-size:32px;
+}
+
+
+/* ======== DIFFICULTY BAR ======= */
+
+.difficulty-container{
+    position:relative;
+    margin-bottom:30px;
+    /* top:75px; */
+    /* left: calc(50% - 4px); */
+}
+
+.difficulty-container p {
+    display:inline;
+    font-size:24px;
+}
+
+#difficulty-slider{ 
+    cursor:pointer;
+    margin:0;
+    padding:0;
+    width:120px;
+    height:12px;
+    border: 1px solid;
+    border-radius:6px;
+    -ms-progress-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+#difficulty-slider:hover{
+    opacity:.9;
+}
+
+#difficulty-slider::-webkit-slider-thumb {
+    appearance:none;
+    width: 18px; 
+    height: 18px; 
+    background: var(--dark-red);
+    border-radius:50%;
+    cursor: pointer; 
+  }
+  
+#difficulty-slider::-moz-range-thumb {
+    appearance:none;
+    width: 18px; 
+    height: 18px;
+    background: var(--dark-red);
+    cursor: pointer; 
+  }
+
