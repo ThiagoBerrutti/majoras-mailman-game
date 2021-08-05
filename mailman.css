@@ -1,11 +1,40 @@
+/*  ------- INDEX ---------
+1) Normal:
+
+#1.1 #GERAL
+#1.2 #VOLUME
+#1.3 #TIMER
+#1.4 #GAME
+#1.5 #BOTÃO
+#1.6 #POPUP
+#1.7 #TEXTO
+#1.8 #DIFFICULTY
+
+2) @media < 480:
+
+#2.1 #GERAL
+#2.2 #GAME
+#2.3 #BOTÃO
+#2.4 #DIFFICULTY
+#2.5 #TEXTO
+#2.6 #TIMER
+#2.7 #VOLUME
+---------------------------*/
+
+
+
+
+/* #1.1 ======== #GERAL ======== */
 @font-face {
     font-family: digital-7;
     src: url('./font/digital-7.ttf');
 }
 
 :root{
+    --margem: 11vw;
     --vermelho: hsl(0,70%, 40%);
     --dark-red:#8B0707;
+    font-size:10px;
 }
 
 *{
@@ -15,42 +44,30 @@
 }
 body{
     color:#262323;
-    padding:0;
+    padding:0 40px;
     margin:0;
     font-family: 'Spartan', sans-serif;
     background-color:#f1f1f1;
-
-    height:100vh;
 }
 
 .container{
     margin:auto;
-    /* background-color: #ff000077; */
     display:flex;
     max-width:700px;
-    justify-content:space-between;
+    justify-content:space-around;
+    gap:min(90px, 10vw);
     min-width:fit-content;
-    height:100%;
+    height:100vh;
     width: 60vw;
 }
 
-.game-dif-container{
-    /* border:1px solid blue; */
-    height:fit-content;
-    position:relative;
-    top:calc(133px - 57px);
-    
-    
-    
-}
 
-/* ======= VOLUME ======= */
+/* ======= #1.2 #VOLUME ======= */
 
 .volume-container{
     position:absolute;
     top:50px;
     left:50px;
-    /* border:1px solid black; */
     width:40px;
     height:40px;
     transition:all .2s;
@@ -60,40 +77,44 @@ body{
 #volume-icon {
     display:block;
     position:absolute;
-    font-size:30px;
+    font-size:3rem;
     color:hsla(240, 20%, 10%);
     cursor:pointer;
 }
 
+
 .volume-container:hover{
-height:120px;
-width:120px;
+    height:120px;
 }
 
 .volume-container:hover .volume-slider-container{
-    left:15px;
     opacity:1;
+    top:80px;
 }
 
 .volume-slider-container{
-    position:relative;
+    position:absolute;
+    display:flex;
+    align-items:center;
     width:120px;
     border-radius:10px;
-    top:33px;
+    padding:15px;
+    left: -40px;
+
+    bottom:unset;
+    top:0;
     background-color:hsla(240, 20%, 10%, .9);
     opacity:0;
     transform:rotate(-90deg); 
     transition-property: left, top, opacity;
-    transition-duration: 0.2s ;
-    left:-20px;    
+    transition-duration:.2s ;
 }
 
 #volume-slider{ 
-    transform-origin:center;
     cursor:pointer;
     margin:0;
     padding:0;
-    margin:20px;
+    border: 1px solid black;
     width:80px;
     height:12px;
     border-radius:6px;
@@ -113,7 +134,7 @@ width:120px;
     appearance:none;
     width: 18px; 
     height: 18px; 
-    background: hsl(0,70%, 40%);
+    background: var(--dark-red);
     border-radius:50%;
     cursor: pointer; 
   }
@@ -127,7 +148,7 @@ width:120px;
   }
 
 
-/* ====== TIMER ====== */  
+/* ====== #1.3 #TIMER ====== */  
 
 .timer_container{
     display:flex;
@@ -137,13 +158,13 @@ width:120px;
     top:40px;
     left:50%;
     transform: translateX(-50%);
-    /* margin:auto; */
+
     width:175px;  
     height: 125px;
     background-image: linear-gradient(135deg, #fff 10%, rgba(255, 255, 255, .5) 90%) ;
-    /* border:5px solid #777; */
+
     border-radius:10px;
-    box-shadow: inset 2px 2px 5px #333;
+    box-shadow: inset 5px 5px 5px rgba(0,0,0,.25);
 }
 
 #timer{
@@ -153,39 +174,48 @@ width:120px;
     margin:0;
 }
 
-/* ======== GAME ======== */
+/* ======== #1.4 #GAME ======== */
 
 .game-container{
-    flex-shrink:0;
+
     position:relative;
     bottom:0;
     
     width:341px;
     height:485px;
-    max-height:800px;
+    max-height:485px;
     box-shadow: 5px 5px 5px rgb(66, 66, 66, .25), -5px -5px 5px rgb(255, 255, 255,.25);
     background-color: #dcdcdc;
-    border-radius:15px;    
+    border-radius:15px; 
+}
 
+.game-dif-container{
+    position:relative;
+    top:76px;
 }
 
 
-/* ======== BOTÃO ======== */
+/* ======== #1.5 #BOTÃO ======== */
 
 #play_btn{
+    --diametro: min((calc(100vw - calc(var(--margem) * 2) ) * 0.3), 100px, 15vh) ; /*30% do width, no maximo 100px ou 15vw */
     padding:0px;
     position:absolute;
-    bottom: 80px;
+    bottom: min(var(--diametro), 40px);
     left: 50%;
     transform: translate(-50%);
-    width: 90px;
-    height:90px;
+
+    width: var(--diametro);
+    height: var(--diametro);
+
     background-color:#f7f7f7;
     border-radius:50%;
-    border: 8px solid hsl(0,70%, 40%);
-    transition: all 0.1s ease-out;
     box-sizing:content-box;
-       font-size:20px;
+    border-width:calc(var(--diametro) * 0.08);
+    border-style:solid;
+    border-color: var(--vermelho);
+    transition: all 0.1s ease-out;
+    font-size:2.4rem;
     letter-spacing:0%;
     box-shadow: 5px 5px 5px #262323, -5px -5px 5px rgba(255, 255, 240, .25);
 }
@@ -204,13 +234,13 @@ width:120px;
     transform: translate(-50%) scale(95%);
 }
 
-/* ======== POPUP ======== */
+/* ======== #1.6 #POPUP ======== */
 
 .result-container{
     position:fixed;
     box-sizing:padding-box;
 
-    font-size:24px;
+    font-size:2.4rem;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -227,7 +257,7 @@ width:120px;
     max-width:500px;
     
     border-radius:5px;
-    border:0px solid var(--vermelho);
+    border:1px solid var(--vermelho);
     
     transform:translate(-50%, -50%); 
     transition-property: width, height, border;
@@ -243,34 +273,29 @@ width:120px;
     box-shadow: 15px 15px 15px #000;
 }
 
-
 #result{
     text-align:center;
     margin:0;
 }
 
-/* ========== TEXTO ========*/
+/* ========== #1.7 #TEXTO ========*/
 
 .text-container{
-    flex-shrink:0;
     position:relative;
     display:block;
     width:260px;
-    margin-right:max(90px, 10vw);
-    /* min-width:260px; */
     top:133px;
-    /* border:1px solid blue; */
     height:fit-content;
+    font-size:1rem;
 }
 
 .main-text, .sub-text1, .sub-text2{
   position:relative;
   display:block;
-  /* border:1px solid black; */
 }
 
 .main-text{
-    font-size: 40px;
+    font-size: 4em;
     margin-bottom:40px;
     line-height:.9;
 }
@@ -280,11 +305,12 @@ width:120px;
 }
 
 .main-text .destaque{
-    margin-left:3ch;
+    margin-left:3em;
 }
 
 .sub-text2 .destaque{
-    margin-left:5ch;
+    margin-left:4em;
+    font-size:1.5em;
 }
 
 .sub-text1{
@@ -296,22 +322,16 @@ width:120px;
 }
 
 .sub-text1, .sub-text2{
-    font-size: 24px;
+    font-size: 2.4em;
     color: #535353;
 }
 
-.sub-text2 .destaque{
-    font-size:32px;
-}
 
-
-/* ======== DIFFICULTY BAR ======= */
+/* ======== #1.8 #DIFFICULTY ======= */
 
 .difficulty-container{
     position:relative;
     margin-bottom:30px;
-    /* top:75px; */
-    /* left: calc(50% - 4px); */
 }
 
 .difficulty-container p {
@@ -321,11 +341,12 @@ width:120px;
 
 #difficulty-slider{ 
     cursor:pointer;
+    display:inline-block;
     margin:0;
     padding:0;
     width:120px;
     height:12px;
-    border: 1px solid;
+    border: 1px solid black;
     border-radius:6px;
     -ms-progress-appearance: none;
     -moz-appearance: none;
@@ -353,3 +374,127 @@ width:120px;
     cursor: pointer; 
   }
 
+
+
+
+
+
+@media (max-width: 480px){
+
+/* ======== #2.1 #GERAL ======== */
+    body{
+        padding:0;
+        margin:0;
+        font-size:1rem;
+        --margem: 11vw;
+    }
+
+  .container{
+        padding:var(--margem);
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
+        gap:3em;
+        width:100vw;
+        font-size: max(.6rem, 1.7vw);        
+    }
+    
+/* ======== #2.2 #GAME ======== */    
+    .game-dif-container{        
+        top:0;
+        padding:0;
+        margin:0;
+    }
+    
+    .game-container{
+        flex:1;
+        height:min(107vw, 60vh - var(--margem));
+        width: calc(100vw - calc(var(--margem) * 2));
+    }
+    
+    .game-container > * {
+        visibility:visible;        
+    }
+
+
+/* ======== #2.3 #BOTÃO ======== */    
+    #play_btn{
+        font-size: 5vw;
+    }
+
+/* ======== #2.4 #DIFFICULTY ======== */
+    .difficulty-container{
+        margin-bottom:10px;
+    }
+
+    .difficulty-container p{
+        font-size: 3em;
+    }
+    
+/* ======== #2.5 #TEXTO ======== */    
+    .text-container{
+        position:relative;
+        display:flex;
+        flex-direction: column;
+        width:min-content;
+        top:0px;
+        height:fit-content;
+        gap:1em;
+        font-size: max(.6rem, 1.7vw);
+    }
+    
+    .sub-text-wrapper{
+        display:flex;
+        flex-direction: column;
+        gap:.5em;        
+    }
+
+    .main-text{
+        margin-bottom:0;
+    }
+
+    .main-text .destaque{
+        margin-left:4em;
+    }
+
+    .sub-text1{
+        margin:0;
+    }
+
+    .time{
+      font-weight:bold;
+    }
+
+
+/* ======== #2.6 #TIMER ======== */
+
+    .timer_container{
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        position:absolute;
+        top:40px;
+        left:50%;
+        transform: translateX(-50%);
+        width:60%;  
+        height: 75px;
+        background-image: linear-gradient(135deg, #fff 10%, rgba(255, 255, 255, .5) 90%) ;
+        border-radius:0px;
+    }
+    
+    #timer{
+        font-family:digital-7;
+        position:absolute;
+        font-size:5rem;
+        margin:0;
+    }
+
+
+/* ======== #2.7 #VOLUME ======== */
+
+    .volume-container{
+        top:var(--margem);
+        right:var(--margem);
+        left:unset;        
+    }
+}  

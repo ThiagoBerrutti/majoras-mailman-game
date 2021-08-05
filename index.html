@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width"><!--, initial-scale=1.0-->
     <title>Count exactly to 10 seconds!</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,34 +12,36 @@
     <link rel="stylesheet" href="./mailman.css">
 </head>
 <body>
-    <div class="container">
-        
-
-        <div class="volume-container">
-            <div>
-                <i class="fas"id="volume-icon"></i>
-            </div>
-            <div class="volume-slider-container">
-                <input  id="volume-slider" value=0 min=0 max=3 type="range"> 
-            </div>
+    <div class="volume-container">
+        <div>
+            <i class="fas"id="volume-icon"></i>
         </div>
+        <div class="volume-slider-container">
+            <input  id="volume-slider" value=0 min=0 max=3 type="range"> 
+        </div>
+    </div>
+    
+    <div class="container">        
         
         <div class="text-container">
             <div class="main-text">
                 <p>Clique em</p>
                 <p class="destaque">START</p>
-            </div>    
+            </div>   
 
-            <div class="sub-text1">
-                <p>conte mentalmente</p>
-                <p>até <span class="time">3</span> segundos...</p>
-            </div>
+            <div class="sub-text-wrapper">
+                <div class="sub-text1">
+                    <p>conte mentalmente</p>
+                    <p>até <span class="time destaque">3</span> segundos...</p>
+                </div>
 
-            <div class="sub-text2">
-                <p>...e clique em</p>
-                <p class="destaque">STOP!</p>
-            </div>
+                <div class="sub-text2">
+                    <p>...e clique em</p>
+                    <p class="destaque">STOP!</p>
+                </div>
+            </div>  
         </div>
+
         <div class="game-dif-container">
             <div class="difficulty-container">
                 <p>Dificuldade: </p> 
